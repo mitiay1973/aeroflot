@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище p_Plane_SorokinModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="citys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="klients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="klient" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plane" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="mesta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_city_otpr" Type="int" Nullable="false" />
+          <Property Name="id_city_prib" Type="int" Nullable="false" />
+          <Property Name="id_plane" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="dlitelnost" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_reis_citys">
+          <End Role="citys" Type="Self.citys" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citys">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_city_otpr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reis_citys1">
+          <End Role="citys" Type="Self.citys" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citys">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_city_prib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reis_planes">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище p_Plane_SorokinModelContainer">
+          <EntitySet Name="citys" EntityType="Self.citys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klients" EntityType="Self.klients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="planes" EntityType="Self.planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reis" EntityType="Self.reis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_reis_citys" Association="Self.FK_reis_citys">
+            <End Role="citys" EntitySet="citys" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reis_citys1" Association="Self.FK_reis_citys1">
+            <End Role="citys" EntitySet="citys" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reis_planes" Association="Self.FK_reis_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="p_Plane_SorokinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="citys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="reis" Relationship="Self.FK_reis_citys" FromRole="citys" ToRole="reis" />
+          <NavigationProperty Name="reis1" Relationship="Self.FK_reis_citys1" FromRole="citys" ToRole="reis" />
+        </EntityType>
+        <EntityType Name="klients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="klient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plane" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mesta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="reis" Relationship="Self.FK_reis_planes" FromRole="planes" ToRole="reis" />
+        </EntityType>
+        <EntityType Name="reis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reis1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_city_otpr" Type="Int32" Nullable="false" />
+          <Property Name="id_city_prib" Type="Int32" Nullable="false" />
+          <Property Name="id_plane" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dlitelnost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="citys" Relationship="Self.FK_reis_citys" FromRole="reis" ToRole="citys" />
+          <NavigationProperty Name="citys1" Relationship="Self.FK_reis_citys1" FromRole="reis" ToRole="citys" />
+          <NavigationProperty Name="planes" Relationship="Self.FK_reis_planes" FromRole="reis" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_reis_citys">
+          <End Role="citys" Type="Self.citys" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citys">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_city_otpr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reis_citys1">
+          <End Role="citys" Type="Self.citys" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citys">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_city_prib" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reis_planes">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="reis" Type="Self.reis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="reis">
+              <PropertyRef Name="id_plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="citys" EntityType="Self.citys" />
+          <EntitySet Name="klients" EntityType="Self.klients" />
+          <EntitySet Name="planes" EntityType="Self.planes" />
+          <EntitySet Name="reis" EntityType="Self.reis" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_reis_citys" Association="Self.FK_reis_citys">
+            <End Role="citys" EntitySet="citys" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reis_citys1" Association="Self.FK_reis_citys1">
+            <End Role="citys" EntitySet="citys" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reis_planes" Association="Self.FK_reis_planes">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище p_Plane_SorokinModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="citys">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.citys">
+              <MappingFragment StoreEntitySet="citys">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klients">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.klients">
+              <MappingFragment StoreEntitySet="klients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="klient" ColumnName="klient" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planes">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.planes">
+              <MappingFragment StoreEntitySet="planes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="plane" ColumnName="plane" />
+                <ScalarProperty Name="mesta" ColumnName="mesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reis">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.reis">
+              <MappingFragment StoreEntitySet="reis">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="reis1" ColumnName="reis" />
+                <ScalarProperty Name="id_city_otpr" ColumnName="id_city_otpr" />
+                <ScalarProperty Name="id_city_prib" ColumnName="id_city_prib" />
+                <ScalarProperty Name="id_plane" ColumnName="id_plane" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="dlitelnost" ColumnName="dlitelnost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
