@@ -9,13 +9,19 @@
       Title="Glavnaya">
 
     <Grid Height="338" Width="800">
-        <DataGrid x:Name="DgridHotels" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Рейс" Binding="{Binding reis1}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Город отправки" Binding="{Binding citys.city}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Город прибытия" Binding="{Binding citys1.city}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Самолет" Binding="{Binding planes.plane}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата вылета" Binding="{Binding date}" ></DataGridTextColumn>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="169"/>
+            <RowDefinition Height="169"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" >
+        <DataGrid x:Name="DgridHotels1" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Самолет" Binding="{Binding planes.plane}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата вылета" Binding="{Binding planes.mesta}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Длительность полета" Binding="{Binding dlitelnost}" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Цена" Binding="{Binding zena}" ></DataGridTextColumn>
                 <DataGridTemplateColumn Width="auto">
@@ -26,5 +32,25 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="DgridHotels" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-400,0" SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Рейс" Binding="{Binding reis1}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Город отправки" Binding="{Binding citys.city}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Город прибытия" Binding="{Binding citys1.city}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Самолет" Binding="{Binding planes.plane}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата вылета" Binding="{Binding date}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Длительность полета" Binding="{Binding dlitelnost}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding zena}" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Page>

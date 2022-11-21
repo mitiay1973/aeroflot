@@ -24,6 +24,8 @@ namespace aeroflot
         {
             InitializeComponent();
             DgridHotels.ItemsSource = Entities.GetContext().reis.ToList();
+            Glavnaya customer = (Glavnaya)DgridHotels.SelectedItem;
         }
+
     }
 }
