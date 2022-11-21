@@ -41,12 +41,33 @@ namespace aeroflot
                         if(pas==pas1)
                         {
                             List<aeroflot.klients> user = new List<aeroflot.klients>() {new klients()};
+                            int count = Entities.GetContext().klients.Count();
+                            user[0].id = count+1;
                             user[0].klient =log;
+                            
                             user[0].password = pas;
                             Entities.GetContext().klients.Add(user[0]);
+                            Entities.GetContext().SaveChanges();
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show("Пароли не совпадают");
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Повторите пароль");
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Введите пароль");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите логин");
             }
 
         }

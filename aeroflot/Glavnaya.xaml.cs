@@ -23,6 +23,7 @@ namespace aeroflot
         public Glavnaya()
         {
             InitializeComponent();
+            DgridHotels.ItemsSource = Entities.GetContext().reis.ToList();
         }
     }
 }

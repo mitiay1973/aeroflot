@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище p_Plane_SorokinModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище p_Plane_SorokinModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citys">
           <Key>
             <PropertyRef Name="id" />
@@ -39,6 +39,7 @@
           <Property Name="id_plane" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="dlitelnost" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="zena" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -105,8 +106,7 @@
             <End Role="reis" EntitySet="reis" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="p_Plane_SorokinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -150,6 +150,7 @@
           <NavigationProperty Name="citys" Relationship="Self.FK_reis_citys" FromRole="reis" ToRole="citys" />
           <NavigationProperty Name="citys1" Relationship="Self.FK_reis_citys1" FromRole="reis" ToRole="citys" />
           <NavigationProperty Name="planes" Relationship="Self.FK_reis_planes" FromRole="reis" ToRole="planes" />
+          <Property Name="zena" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -251,6 +252,7 @@
           <EntitySetMapping Name="reis">
             <EntityTypeMapping TypeName="p_Plane_SorokinModel.reis">
               <MappingFragment StoreEntitySet="reis">
+                <ScalarProperty Name="zena" ColumnName="zena" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="reis1" ColumnName="reis" />
                 <ScalarProperty Name="id_city_otpr" ColumnName="id_city_otpr" />

@@ -41,7 +41,7 @@ namespace aeroflot
         private void vxod_Click(object sender, RoutedEventArgs e)
         {
             string klients = login.Text;
-            string pas = password.Text;
+            string pas = password.Password;
             int count = Entities.GetContext().klients.Count();
             users = Entities.GetContext().klients.ToList();
             for (int i = 0; i < count; i++)
@@ -54,12 +54,8 @@ namespace aeroflot
                     }
                     else
                     {
-                        MessageBox.Show("Неверный пароль");
+                        MessageBox.Show("Неверный логин или пароль");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Неверный логин");
                 }
             }
 

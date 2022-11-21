@@ -21,6 +21,7 @@ namespace aeroflot
         public int id_plane { get; set; }
         public System.DateTime date { get; set; }
         public string dlitelnost { get; set; }
+        public int zena { get; set; }
     
         public virtual citys citys { get; set; }
         public virtual citys citys1 { get; set; }

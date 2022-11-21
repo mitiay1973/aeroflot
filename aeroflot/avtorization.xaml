@@ -10,7 +10,7 @@
 
     <Grid Height="338" Width="800">
         <TextBox x:Name="login" HorizontalAlignment="Center" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="login_TextChanged"/>
-        <TextBox x:Name="password" HorizontalAlignment="Center" Margin="0,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="password_TextChanged"/>
+        <PasswordBox x:Name="password" HorizontalAlignment="Center" Margin="0,86,0,0"  VerticalAlignment="Top" Width="290" Height="38" />
         <Button x:Name="vxod" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Center" Height="62" Width="264" Click="vxod_Click"/>
         <Button x:Name="reg" Content="Зарегистрироваться" HorizontalAlignment="Center" VerticalAlignment="Top" Height="62" Width="264" Margin="0,215,0,0" Click="reg_Click"/>
 
