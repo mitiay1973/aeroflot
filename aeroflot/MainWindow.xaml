@@ -20,7 +20,7 @@
             <Button x:Name="back" Content="Назад" Click="back_Click" Margin="1320,54,24,16" RenderTransformOrigin="0.44,0.695" FontSize="36" FontFamily="Bahnschrift" Padding="1,1,1,1" Grid.IsSharedSizeScope="True" />
             <Image x:Name="logo" HorizontalAlignment="Left" Height="54" Margin="0,5,0,0" VerticalAlignment="Top" Width="100" Source="/logo.png"/>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="1"  Background="#FF1B304C">
+        <Grid Grid.Row="2" Grid.Column="1"  Background="#FF1B304C">
         </Grid>
         <Frame Grid.Row="1" NavigationUIVisibility='Hidden' Name="MainFrame"></Frame>
     </Grid>

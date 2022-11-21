@@ -19,16 +19,17 @@ namespace aeroflot
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
+
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new avtorization());
-            Manager.MainFrame = MainFrame;
+            MainFrame.Navigate(new avtorization(MainFrame));
         }
         private void back_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.GoBack();
         }
+        
     }
 }

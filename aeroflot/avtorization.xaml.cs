@@ -20,8 +20,10 @@ namespace aeroflot
     /// </summary>
     public partial class avtorization : Page
     {
-        public avtorization()
+        public Frame frame1;
+        public avtorization(Frame frame)
         {
+            frame1 = frame;
             InitializeComponent();
         }
 
@@ -34,28 +36,38 @@ namespace aeroflot
         {
 
         }
-       
+
         List<aeroflot.klients> users = new List<aeroflot.klients>();
         private void vxod_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
             string klients = login.Text;
-            string[] k=new string[1];
-            k[0] = Convert.ToString(Entities.GetContext().klients.ToList().ToArray());
+            string pas = password.Text;
+            int count = Entities.GetContext().klients.Count();
             users = Entities.GetContext().klients.ToList();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < count; i++)
             {
-            //    if ( == klients)
-            //    {
-            //    mainWindow.MainFrame.Navigate(new Glavnaya());
-            //}
-        }
+                if (users[i].klient == klients)
+                {
+                    if (users[i].password == pas)
+                    {
+                        frame1.Navigate(new Glavnaya());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неверный пароль");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин");
+                }
+            }
 
         }
 
         private void reg_Click(object sender, RoutedEventArgs e)
         {
-
+            frame1.Navigate(new Registration(frame1));
         }
     }
 }
