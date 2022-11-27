@@ -21,6 +21,7 @@ namespace aeroflot
     public partial class avtorization : Page
     {
         public Frame frame1;
+        public int vx = 0;
         public avtorization(Frame frame)
         {
             frame1 = frame;
@@ -51,9 +52,14 @@ namespace aeroflot
                     if (users[i].password == pas)
                     {
                         frame1.Navigate(new Glavnaya(users[i].klient));
+                        vx = 1;
                         break;
                     }                   
                 }
+            }
+            if(vx==0)
+            {
+                MessageBox.Show("Неверный логин или пароль");
             }
 
         }
