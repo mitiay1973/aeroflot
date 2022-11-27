@@ -48,7 +48,7 @@ namespace aeroflot
                             user[0].password = pas;
                             Entities.GetContext().klients.Add(user[0]);
                             Entities.GetContext().SaveChanges();
-                            
+                            frame1.Navigate(new avtorization(frame1));
                         }
                         else
                         {
@@ -85,6 +85,11 @@ namespace aeroflot
         private void password_Copy_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            frame1.Navigate(new avtorization(frame1));
         }
     }
 }

@@ -67,8 +67,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button x:Name="otloz" Grid.Column="1" Content="Отложенные рейсы" HorizontalAlignment="Left" Margin="142,58,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="otloz_Click"/>
+        <Button x:Name="otloz" Grid.Column="1" Content="Отложенные рейсы" HorizontalAlignment="Left" Margin="142,46,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="otloz_Click"/>
         <Button x:Name="planess" Grid.Column="1" Content="Парк самолетов" HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="planess_Click" />
-        <Button x:Name="activ" Grid.Column="1" Content="Активные рейсы" HorizontalAlignment="Left" Margin="142,107,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="activ_Click" />
+        <Button x:Name="activ" Grid.Column="1" Content="Активные рейсы" HorizontalAlignment="Left" Margin="142,84,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="activ_Click" />
+        <Button x:Name="userReis" Grid.Column="1" Content="Рейсы пользователя" HorizontalAlignment="Left" Margin="142,123,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="userReis_Click"  />
     </Grid>
 </Page>

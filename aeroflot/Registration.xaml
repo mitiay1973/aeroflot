@@ -9,9 +9,13 @@
       Title="Registration">
 
     <Grid Height="338" Width="800">
-        <TextBox x:Name="login" HorizontalAlignment="Center" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="login_TextChanged" />
-        <TextBox x:Name="password" HorizontalAlignment="Center" Margin="0,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="password_TextChanged" />
-        <Button x:Name="registration" Content="Зарегистрироваться" HorizontalAlignment="Center" VerticalAlignment="Top" Height="62" Width="264"  Margin="0,187,0,0" Click="registration_Click" />
-        <TextBox x:Name="password_Copy" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38"  Margin="0,118,0,0" TextChanged="password_Copy_TextChanged"/>
+        <TextBox x:Name="login" HorizontalAlignment="Center" Margin="0,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="login_TextChanged" />
+        <TextBox x:Name="password" HorizontalAlignment="Center" Margin="0,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="password_TextChanged" />
+        <Button x:Name="registration" Content="Зарегистрироваться" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" Width="290"  Margin="0,227,0,0" Click="registration_Click" />
+        <TextBox x:Name="password_Copy" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="38" TextChanged="password_Copy_TextChanged" Margin="0,169,0,0"/>
+        <Label Content="Логин" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Height="31" Width="72" FontSize="18"/>
+        <Label Content="Пароль" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top" Height="31" Width="72" FontSize="18"/>
+        <Label Content="Повторите пароль" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Height="31" Width="163" FontSize="18"/>
+        <Button x:Name="back" Content="Отмена" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" Width="290"  Margin="0,277,0,0" Click="back_Click"/>
     </Grid>
 </Page>

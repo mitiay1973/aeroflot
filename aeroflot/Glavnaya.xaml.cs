@@ -20,7 +20,8 @@ namespace aeroflot
     /// </summary>
     public partial class Glavnaya : Page
     {
-        public Glavnaya()
+        string User;
+        public Glavnaya(string user)
         {
             InitializeComponent();
             DgridHotels2.Visibility = Visibility.Collapsed;
@@ -28,6 +29,7 @@ namespace aeroflot
             Glavnaya customer = (Glavnaya)DgridHotels.SelectedItem;
             DgridHotels1.ItemsSource = Entities.GetContext().planes.ToList();
             Glavnaya customer1 = (Glavnaya)DgridHotels1.SelectedItem;
+            User = user;
         }
 
         private void otloz_Click(object sender, RoutedEventArgs e)
@@ -73,6 +75,26 @@ namespace aeroflot
                 }
             }
             DgridHotels2.ItemsSource = act;
+            Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
+        }
+
+        private void userReis_Click(object sender, RoutedEventArgs e)
+        {
+            List<aeroflot.pokupki> user = new List<aeroflot.pokupki>();
+            user = Entities.GetContext().pokupki.ToList();
+            int count = Entities.GetContext().pokupki.Count();
+            DgridHotels1.Visibility = Visibility.Collapsed;
+            DgridHotels2.Visibility = Visibility.Visible;
+            for (int i = 0; i < count; i++)
+            {
+                if (user[i].klients.klient !=User)
+                {
+                    user.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            }
+            DgridHotels2.ItemsSource = user;
             Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
         }
     }
