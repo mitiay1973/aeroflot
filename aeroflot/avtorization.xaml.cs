@@ -52,11 +52,7 @@ namespace aeroflot
                     {
                         frame1.Navigate(new Glavnaya(users[i].klient));
                         break;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неверный логин или пароль");
-                    }
+                    }                   
                 }
             }
 
