@@ -18,7 +18,7 @@
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" >
-            <DataGrid x:Name="DgridHotels1" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-46,0" >
+            <DataGrid x:Name="DgridHotels1" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-120,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Самолет" Binding="{Binding plane}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Посадочных мест" Binding="{Binding mesta}" ></DataGridTextColumn>
@@ -34,7 +34,7 @@
             </DataGrid>
         </Grid>
         <Grid Grid.Row="0" >
-            <DataGrid x:Name="DgridHotels2" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-46,0" >
+            <DataGrid x:Name="DgridHotels2" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-120,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Клиент" Binding="{Binding klients.klient}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Рейс" Binding="{Binding reis.reis1}" ></DataGridTextColumn>
@@ -67,9 +67,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button x:Name="otloz" Grid.Column="1" Content="Отложенные рейсы" HorizontalAlignment="Left" Margin="142,46,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="otloz_Click"/>
-        <Button x:Name="planess" Grid.Column="1" Content="Парк самолетов" HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="planess_Click" />
-        <Button x:Name="activ" Grid.Column="1" Content="Активные рейсы" HorizontalAlignment="Left" Margin="142,84,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="activ_Click" />
-        <Button x:Name="userReis" Grid.Column="1" Content="Рейсы пользователя" HorizontalAlignment="Left" Margin="142,123,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="userReis_Click"  />
+        <Button x:Name="otloz" Grid.Column="1" Content="Отложенные рейсы" HorizontalAlignment="Left" Margin="178,53,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="otloz_Click"/>
+        <Button x:Name="planess" Grid.Column="1" Content="Парк самолетов" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="planess_Click" />
+        <Button x:Name="activ" Grid.Column="1" Content="Активные рейсы" HorizontalAlignment="Left" Margin="178,92,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="activ_Click" />
+        <Button x:Name="userReis" Grid.Column="1" Content="Рейсы пользователя" HorizontalAlignment="Left" Margin="178,133,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="userReis_Click"  />
     </Grid>
 </Page>
