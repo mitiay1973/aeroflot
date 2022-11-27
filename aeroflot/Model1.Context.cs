@@ -32,7 +32,9 @@ namespace aeroflot
     
         public virtual DbSet<citys> citys { get; set; }
         public virtual DbSet<klients> klients { get; set; }
+        public virtual DbSet<piloti> piloti { get; set; }
         public virtual DbSet<planes> planes { get; set; }
+        public virtual DbSet<pokupki> pokupki { get; set; }
         public virtual DbSet<reis> reis { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }

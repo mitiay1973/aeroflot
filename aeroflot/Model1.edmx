@@ -20,6 +20,13 @@
           <Property Name="klient" Type="nvarchar(max)" Nullable="false" />
           <Property Name="password" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="piloti">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pilot" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="planes">
           <Key>
             <PropertyRef Name="id" />
@@ -27,6 +34,17 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="plane" Type="nvarchar(max)" Nullable="false" />
           <Property Name="mesta" Type="int" Nullable="false" />
+          <Property Name="ear" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pilot" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pokupki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klient" Type="int" Nullable="false" />
+          <Property Name="id_reis" Type="int" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="reis">
           <Key>
@@ -51,6 +69,42 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_planes_piloti">
+          <End Role="piloti" Type="Self.piloti" Multiplicity="1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="piloti">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pokupki_klients">
+          <End Role="klients" Type="Self.klients" Multiplicity="1" />
+          <End Role="pokupki" Type="Self.pokupki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pokupki">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pokupki_reis">
+          <End Role="reis" Type="Self.reis" Multiplicity="1" />
+          <End Role="pokupki" Type="Self.pokupki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pokupki">
+              <PropertyRef Name="id_reis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reis_citys">
           <End Role="citys" Type="Self.citys" Multiplicity="1" />
           <End Role="reis" Type="Self.reis" Multiplicity="*" />
@@ -90,9 +144,23 @@
         <EntityContainer Name="Хранилище p_Plane_SorokinModelContainer">
           <EntitySet Name="citys" EntityType="Self.citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="klients" EntityType="Self.klients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="piloti" EntityType="Self.piloti" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="planes" EntityType="Self.planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pokupki" EntityType="Self.pokupki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reis" EntityType="Self.reis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_planes_piloti" Association="Self.FK_planes_piloti">
+            <End Role="piloti" EntitySet="piloti" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pokupki_klients" Association="Self.FK_pokupki_klients">
+            <End Role="klients" EntitySet="klients" />
+            <End Role="pokupki" EntitySet="pokupki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pokupki_reis" Association="Self.FK_pokupki_reis">
+            <End Role="reis" EntitySet="reis" />
+            <End Role="pokupki" EntitySet="pokupki" />
+          </AssociationSet>
           <AssociationSet Name="FK_reis_citys" Association="Self.FK_reis_citys">
             <End Role="citys" EntitySet="citys" />
             <End Role="reis" EntitySet="reis" />
@@ -126,6 +194,15 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="klient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="pokupki" Relationship="Self.FK_pokupki_klients" FromRole="klients" ToRole="pokupki" />
+        </EntityType>
+        <EntityType Name="piloti">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pilot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="planes" Relationship="Self.FK_planes_piloti" FromRole="piloti" ToRole="planes" />
         </EntityType>
         <EntityType Name="planes">
           <Key>
@@ -134,7 +211,21 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="plane" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="mesta" Type="Int32" Nullable="false" />
+          <Property Name="ear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pilot" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="piloti" Relationship="Self.FK_planes_piloti" FromRole="planes" ToRole="piloti" />
           <NavigationProperty Name="reis" Relationship="Self.FK_reis_planes" FromRole="planes" ToRole="reis" />
+        </EntityType>
+        <EntityType Name="pokupki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <Property Name="id_reis" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="klients" Relationship="Self.FK_pokupki_klients" FromRole="pokupki" ToRole="klients" />
+          <NavigationProperty Name="reis" Relationship="Self.FK_pokupki_reis" FromRole="pokupki" ToRole="reis" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="reis">
           <Key>
@@ -147,10 +238,11 @@
           <Property Name="id_plane" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="dlitelnost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zena" Type="Int32" Nullable="false" />
           <NavigationProperty Name="citys" Relationship="Self.FK_reis_citys" FromRole="reis" ToRole="citys" />
           <NavigationProperty Name="citys1" Relationship="Self.FK_reis_citys1" FromRole="reis" ToRole="citys" />
           <NavigationProperty Name="planes" Relationship="Self.FK_reis_planes" FromRole="reis" ToRole="planes" />
-          <Property Name="zena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pokupki" Relationship="Self.FK_pokupki_reis" FromRole="reis" ToRole="pokupki" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -186,6 +278,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_pokupki_klients">
+          <End Role="klients" Type="Self.klients" Multiplicity="1" />
+          <End Role="pokupki" Type="Self.pokupki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pokupki">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_planes_piloti">
+          <End Role="piloti" Type="Self.piloti" Multiplicity="1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="piloti">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reis_planes">
           <End Role="planes" Type="Self.planes" Multiplicity="1" />
           <End Role="reis" Type="Self.reis" Multiplicity="*" />
@@ -198,10 +314,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_pokupki_reis">
+          <End Role="reis" Type="Self.reis" Multiplicity="1" />
+          <End Role="pokupki" Type="Self.pokupki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pokupki">
+              <PropertyRef Name="id_reis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="citys" EntityType="Self.citys" />
           <EntitySet Name="klients" EntityType="Self.klients" />
+          <EntitySet Name="piloti" EntityType="Self.piloti" />
           <EntitySet Name="planes" EntityType="Self.planes" />
+          <EntitySet Name="pokupki" EntityType="Self.pokupki" />
           <EntitySet Name="reis" EntityType="Self.reis" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_reis_citys" Association="Self.FK_reis_citys">
@@ -212,9 +342,21 @@
             <End Role="citys" EntitySet="citys" />
             <End Role="reis" EntitySet="reis" />
           </AssociationSet>
+          <AssociationSet Name="FK_pokupki_klients" Association="Self.FK_pokupki_klients">
+            <End Role="klients" EntitySet="klients" />
+            <End Role="pokupki" EntitySet="pokupki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_planes_piloti" Association="Self.FK_planes_piloti">
+            <End Role="piloti" EntitySet="piloti" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
           <AssociationSet Name="FK_reis_planes" Association="Self.FK_reis_planes">
             <End Role="planes" EntitySet="planes" />
             <End Role="reis" EntitySet="reis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pokupki_reis" Association="Self.FK_pokupki_reis">
+            <End Role="reis" EntitySet="reis" />
+            <End Role="pokupki" EntitySet="pokupki" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -240,19 +382,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="piloti">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.piloti">
+              <MappingFragment StoreEntitySet="piloti">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pilot" ColumnName="pilot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="planes">
             <EntityTypeMapping TypeName="p_Plane_SorokinModel.planes">
               <MappingFragment StoreEntitySet="planes">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="plane" ColumnName="plane" />
                 <ScalarProperty Name="mesta" ColumnName="mesta" />
+                <ScalarProperty Name="ear" ColumnName="ear" />
+                <ScalarProperty Name="pilot" ColumnName="pilot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pokupki">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.pokupki">
+              <MappingFragment StoreEntitySet="pokupki">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+                <ScalarProperty Name="id_reis" ColumnName="id_reis" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="reis">
             <EntityTypeMapping TypeName="p_Plane_SorokinModel.reis">
               <MappingFragment StoreEntitySet="reis">
-                <ScalarProperty Name="zena" ColumnName="zena" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="reis1" ColumnName="reis" />
                 <ScalarProperty Name="id_city_otpr" ColumnName="id_city_otpr" />
@@ -260,6 +421,7 @@
                 <ScalarProperty Name="id_plane" ColumnName="id_plane" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="dlitelnost" ColumnName="dlitelnost" />
+                <ScalarProperty Name="zena" ColumnName="zena" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

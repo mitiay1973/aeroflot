@@ -23,9 +23,57 @@ namespace aeroflot
         public Glavnaya()
         {
             InitializeComponent();
+            DgridHotels2.Visibility = Visibility.Collapsed;
             DgridHotels.ItemsSource = Entities.GetContext().reis.ToList();
             Glavnaya customer = (Glavnaya)DgridHotels.SelectedItem;
+            DgridHotels1.ItemsSource = Entities.GetContext().planes.ToList();
+            Glavnaya customer1 = (Glavnaya)DgridHotels1.SelectedItem;
         }
 
+        private void otloz_Click(object sender, RoutedEventArgs e)
+        {
+            List<aeroflot.pokupki> otl = new List<aeroflot.pokupki>();
+            otl = Entities.GetContext().pokupki.ToList();
+            int count = Entities.GetContext().pokupki.Count();
+                DgridHotels1.Visibility = Visibility.Collapsed;
+                DgridHotels2.Visibility = Visibility.Visible;
+                for (int i = 0; i < count; i++)
+                {
+                    if (otl[i].status!="Отложен")
+                    {
+                        otl.RemoveAt(i);
+                        i--;
+                        count--;
+                    }
+                }
+                DgridHotels2.ItemsSource = otl;
+                Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;   
+        }
+
+        private void planess_Click(object sender, RoutedEventArgs e)
+        {
+            DgridHotels1.Visibility = Visibility.Visible;
+            DgridHotels2.Visibility = Visibility.Collapsed;
+        }
+
+        private void activ_Click(object sender, RoutedEventArgs e)
+        {
+            List<aeroflot.pokupki> act = new List<aeroflot.pokupki>();
+            act = Entities.GetContext().pokupki.ToList();
+            int count = Entities.GetContext().pokupki.Count();
+            DgridHotels1.Visibility = Visibility.Collapsed;
+            DgridHotels2.Visibility = Visibility.Visible;
+            for (int i = 0; i < count; i++)
+            {
+                if (act[i].status != "Активен")
+                {
+                    act.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            }
+            DgridHotels2.ItemsSource = act;
+            Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
+        }
     }
 }

@@ -14,6 +14,12 @@ namespace aeroflot
     
     public partial class reis
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public reis()
+        {
+            this.pokupki = new HashSet<pokupki>();
+        }
+    
         public int id { get; set; }
         public string reis1 { get; set; }
         public int id_city_otpr { get; set; }
@@ -26,5 +32,7 @@ namespace aeroflot
         public virtual citys citys { get; set; }
         public virtual citys citys1 { get; set; }
         public virtual planes planes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<pokupki> pokupki { get; set; }
     }
 }

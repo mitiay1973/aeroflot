@@ -18,20 +18,35 @@
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" >
-        <DataGrid x:Name="DgridHotels1" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" >
+            <DataGrid x:Name="DgridHotels1" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-46,0" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Самолет" Binding="{Binding planes.plane}" ></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата вылета" Binding="{Binding planes.mesta}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Длительность полета" Binding="{Binding dlitelnost}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Цена" Binding="{Binding zena}" ></DataGridTextColumn>
-                <DataGridTemplateColumn Width="auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGridTextColumn Header="Самолет" Binding="{Binding plane}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Посадочных мест" Binding="{Binding mesta}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Год выпуска" Binding="{Binding ear}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Пилот" Binding="{Binding piloti.pilot}" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="0" >
+            <DataGrid x:Name="DgridHotels2" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-46,0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Клиент" Binding="{Binding klients.klient}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Рейс" Binding="{Binding reis.reis1}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding status}" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Grid Grid.Row="1">
             <DataGrid x:Name="DgridHotels" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-400,0" SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}">
@@ -52,5 +67,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button x:Name="otloz" Grid.Column="1" Content="Отложенные рейсы" HorizontalAlignment="Left" Margin="142,58,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="otloz_Click"/>
+        <Button x:Name="planess" Grid.Column="1" Content="Парк самолетов" HorizontalAlignment="Left" Margin="142,10,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="planess_Click" />
+        <Button x:Name="activ" Grid.Column="1" Content="Активные рейсы" HorizontalAlignment="Left" Margin="142,107,0,0" VerticalAlignment="Top" Height="26" Width="172" Click="activ_Click" />
     </Grid>
 </Page>

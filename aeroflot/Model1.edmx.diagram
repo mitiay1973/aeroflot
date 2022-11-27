@@ -4,15 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e66ccb6b87684c038b0577752c0eb143" Name="Diagram1">
-        <EntityTypeShape EntityType="p_Plane_SorokinModel.citys" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="p_Plane_SorokinModel.klients" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="d3c0f02463224923a0dd9f5bd837c67a" Name="Diagram1">
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.citys" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.klients" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.piloti" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="p_Plane_SorokinModel.planes" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.pokupki" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="p_Plane_SorokinModel.reis" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="p_Plane_SorokinModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="p_Plane_SorokinModel.FK_reis_citys" ManuallyRouted="false" />
         <AssociationConnector Association="p_Plane_SorokinModel.FK_reis_citys1" ManuallyRouted="false" />
+        <AssociationConnector Association="p_Plane_SorokinModel.FK_pokupki_klients" ManuallyRouted="false" />
+        <AssociationConnector Association="p_Plane_SorokinModel.FK_planes_piloti" ManuallyRouted="false" />
         <AssociationConnector Association="p_Plane_SorokinModel.FK_reis_planes" ManuallyRouted="false" />
+        <AssociationConnector Association="p_Plane_SorokinModel.FK_pokupki_reis" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

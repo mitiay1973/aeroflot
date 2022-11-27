@@ -23,7 +23,10 @@ namespace aeroflot
         public int id { get; set; }
         public string plane { get; set; }
         public int mesta { get; set; }
+        public string ear { get; set; }
+        public int pilot { get; set; }
     
+        public virtual piloti piloti { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reis> reis { get; set; }
     }

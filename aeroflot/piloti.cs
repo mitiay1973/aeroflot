@@ -12,19 +12,18 @@ namespace aeroflot
     using System;
     using System.Collections.Generic;
     
-    public partial class klients
+    public partial class piloti
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public klients()
+        public piloti()
         {
-            this.pokupki = new HashSet<pokupki>();
+            this.planes = new HashSet<planes>();
         }
     
         public int id { get; set; }
-        public string klient { get; set; }
-        public string password { get; set; }
+        public string pilot { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pokupki> pokupki { get; set; }
+        public virtual ICollection<planes> planes { get; set; }
     }
 }
