@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:aeroflot"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Аэрофлот" Height="450" Width="800" MaxHeight="450" MinHeight="450" MaxWidth="800" MinWidth="800" Icon="/logo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -17,7 +17,6 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0"  Background="#FFC6F1FF">
            
-            <Button x:Name="back" Content="Назад" Click="back_Click" Margin="1320,54,24,16" RenderTransformOrigin="0.44,0.695" FontSize="36" FontFamily="Bahnschrift" Padding="1,1,1,1" Grid.IsSharedSizeScope="True" />
             <Image x:Name="logo" HorizontalAlignment="Left" Height="54" Margin="0,5,0,0" VerticalAlignment="Top" Width="100" Source="/logo.png"/>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1"  Background="#FF1B304C">

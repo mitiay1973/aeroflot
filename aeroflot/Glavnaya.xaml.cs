@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,6 +98,41 @@ namespace aeroflot
             }
             DgridHotels2.ItemsSource = user;
             Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
+        }
+
+        private void DgridHotels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MessageBox.Show($"Вы хотите забронировать этот рейс?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                List<aeroflot.reis> r = new List<aeroflot.reis>();
+                r = Entities.GetContext().reis.ToList();
+                int count11 = Entities.GetContext().reis.Count();
+                int count111 = Entities.GetContext().klients.Count();
+                IList rows = DgridHotels.SelectedItems;
+                object a = rows[0];
+                for (int i = 0; i < count11; i++)
+                {
+                    if (r[i].reis1 == ((aeroflot.reis)a).reis1)
+                    {
+                        int index = r[i].id;
+                        List<aeroflot.pokupki> rr = new List<aeroflot.pokupki>() { new pokupki() };
+                        List<aeroflot.klients> rrr = new List<aeroflot.klients>() ;
+                        rrr = Entities.GetContext().klients.ToList();
+                        rr[0].id_reis = index;
+                        for (int j = 0; j < count11; j++)
+                        {
+                            if (rrr[j].klient==User)
+                            {
+                                rr[0].id_klient = rrr[j].id;
+                                break;
+                            }
+                        }
+                        rr[0].status = "Активен";
+                        Entities.GetContext().pokupki.Add(rr[0]);
+                        Entities.GetContext().SaveChanges();
+                    }
+                }
+            }
         }
     }
 }

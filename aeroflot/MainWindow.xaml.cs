@@ -26,10 +26,6 @@ namespace aeroflot
             InitializeComponent();
             MainFrame.Navigate(new avtorization(MainFrame));
         }
-        private void back_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.GoBack();
-        }
         
     }
 }
