@@ -111,19 +111,19 @@ namespace aeroflot
             }
 
             Dgridreis.ItemsSource = null;
-            List<aeroflot.reis> reisiii = new List<aeroflot.reis>();
-            reisiii = Entities.GetContext().reis.ToList();
+            List<aeroflot.reis> reisiiii = new List<aeroflot.reis>();
+            reisiiii = Entities.GetContext().reis.ToList();
             int counts1 = Entities.GetContext().reis.Count();
             for (int j = 0; j < counts1; j++)
             {
-                if (reisiii[j].date < DateTime.Now)
+                if (reisiiii[j].date < DateTime.Now && reisiiii[j].citys.city != ComboType.Text || reisiiii[j].citys1.city != ComboType1.Text)
                 {
-                    reisiii.RemoveAt(j);
+                    reisiiii.RemoveAt(j);
                     j--;
                     counts1--;
                 }
             }
-            Dgridreis.ItemsSource = reisiii;
+            Dgridreis.ItemsSource = reisiiii;
             Glavnaya customer = (Glavnaya)Dgridreis.SelectedItem;
             rel = 0;
         }
