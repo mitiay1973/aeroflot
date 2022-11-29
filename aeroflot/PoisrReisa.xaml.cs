@@ -51,7 +51,7 @@ namespace aeroflot
             int counts = Entities.GetContext().reis.Count();
             for (int i = 0; i < counts; i++)
             {
-                if (reisii[i].citys.city!=ComboType.Text || reisii[i].citys1.city != ComboType1.Text)
+                if (reisii[i].date < DateTime.Now || reisii[i].citys.city!=ComboType.Text || reisii[i].citys1.city != ComboType1.Text)
                 {
                         reisii.RemoveAt(i);
                         i--;
@@ -116,7 +116,7 @@ namespace aeroflot
             int counts1 = Entities.GetContext().reis.Count();
             for (int j = 0; j < counts1; j++)
             {
-                if (reisiiii[j].date < DateTime.Now && reisiiii[j].citys.city != ComboType.Text || reisiiii[j].citys1.city != ComboType1.Text)
+                if (reisiiii[j].date < DateTime.Now || reisiiii[j].citys.city != ComboType.Text || reisiiii[j].citys1.city != ComboType1.Text)
                 {
                     reisiiii.RemoveAt(j);
                     j--;
