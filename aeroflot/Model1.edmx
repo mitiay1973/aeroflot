@@ -45,6 +45,18 @@
           <Property Name="id_klient" Type="int" Nullable="false" />
           <Property Name="id_reis" Type="int" Nullable="false" />
           <Property Name="status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="statusOplati" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stoimost" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "43p_Plane_Sorokin.dbo.prazdniki" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="prazdniki">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="prazdnik" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prazdnik" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="reis">
           <Key>
@@ -149,6 +161,12 @@
           <EntitySet Name="pokupki" EntityType="Self.pokupki" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reis" EntityType="Self.reis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prazdniki" EntityType="Self.prazdniki" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [prazdniki].[id] AS [id], 
+    [prazdniki].[prazdnik] AS [prazdnik]
+    FROM [dbo].[prazdniki] AS [prazdniki]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_planes_piloti" Association="Self.FK_planes_piloti">
             <End Role="piloti" EntitySet="piloti" />
             <End Role="planes" EntitySet="planes" />
@@ -226,6 +244,8 @@
           <NavigationProperty Name="klients" Relationship="Self.FK_pokupki_klients" FromRole="pokupki" ToRole="klients" />
           <NavigationProperty Name="reis" Relationship="Self.FK_pokupki_reis" FromRole="pokupki" ToRole="reis" />
           <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="statusOplati" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stoimost" Type="Int32" />
         </EntityType>
         <EntityType Name="reis">
           <Key>
@@ -358,7 +378,16 @@
             <End Role="reis" EntitySet="reis" />
             <End Role="pokupki" EntitySet="pokupki" />
           </AssociationSet>
+          <EntitySet Name="prazdniki" EntityType="p_Plane_SorokinModel.prazdniki" />
         </EntityContainer>
+        <EntityType Name="prazdniki">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="prazdnik" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prazdnik" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -404,6 +433,8 @@
           <EntitySetMapping Name="pokupki">
             <EntityTypeMapping TypeName="p_Plane_SorokinModel.pokupki">
               <MappingFragment StoreEntitySet="pokupki">
+                <ScalarProperty Name="stoimost" ColumnName="stoimost" />
+                <ScalarProperty Name="statusOplati" ColumnName="statusOplati" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_klient" ColumnName="id_klient" />
@@ -433,6 +464,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prazdniki">
+            <EntityTypeMapping TypeName="p_Plane_SorokinModel.prazdniki">
+              <MappingFragment StoreEntitySet="prazdniki">
+                <ScalarProperty Name="prazdnik" ColumnName="prazdnik" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

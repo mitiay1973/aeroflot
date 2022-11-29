@@ -37,5 +37,6 @@ namespace aeroflot
         public virtual DbSet<pokupki> pokupki { get; set; }
         public virtual DbSet<reis> reis { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<prazdniki> prazdniki { get; set; }
     }
 }

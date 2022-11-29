@@ -52,9 +52,12 @@ namespace aeroflot
         private void otloz_Click(object sender, RoutedEventArgs e)
         {
             List<aeroflot.pokupki> otl = new List<aeroflot.pokupki>();
+            List<aeroflot.prazdniki> pr = new List<aeroflot.prazdniki>();
+            pr= Entities.GetContext().prazdniki.ToList();
             otl = Entities.GetContext().pokupki.ToList();
             int count = Entities.GetContext().pokupki.Count();
-                DgridHotels1.Visibility = Visibility.Collapsed;
+            int countpr = Entities.GetContext().prazdniki.Count();
+            DgridHotels1.Visibility = Visibility.Collapsed;
                 DgridHotels2.Visibility = Visibility.Visible;
                 for (int i = 0; i < count; i++)
                 {
@@ -65,7 +68,36 @@ namespace aeroflot
                         count--;
                     }
                 }
-                DgridHotels2.ItemsSource = otl;
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < countpr; j++)
+                {
+                    if (otl[i].reis.date.Day == pr[j].prazdnik.Day)
+                    {
+                        if (otl[i].reis.date.Month == pr[j].prazdnik.Month)
+                        {
+                            if (otl[i].reis.date.Year == pr[j].prazdnik.Year)
+                            {
+                                otl[i].stoimost = otl[i].reis.zena / 100 * 80;
+                                j = countpr - 1;
+                            }
+                            else
+                            {
+                                otl[i].stoimost = otl[i].reis.zena;
+                            }
+                        }
+                        else
+                        {
+                            otl[i].stoimost = otl[i].reis.zena;
+                        }
+                    }
+                    else
+                    {
+                        otl[i].stoimost = otl[i].reis.zena;
+                    }
+                }
+            }
+            DgridHotels2.ItemsSource = otl;
                 Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;   
         }
 
@@ -79,7 +111,10 @@ namespace aeroflot
         {
             List<aeroflot.pokupki> act = new List<aeroflot.pokupki>();
             act = Entities.GetContext().pokupki.ToList();
+            List<aeroflot.prazdniki> pr1 = new List<aeroflot.prazdniki>();
+            pr1 = Entities.GetContext().prazdniki.ToList();
             int count = Entities.GetContext().pokupki.Count();
+            int countpr1 = Entities.GetContext().prazdniki.Count();
             DgridHotels1.Visibility = Visibility.Collapsed;
             DgridHotels2.Visibility = Visibility.Visible;
             for (int i = 0; i < count; i++)
@@ -91,6 +126,35 @@ namespace aeroflot
                     count--;
                 }
             }
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < countpr1; j++)
+                {
+                    if (act[i].reis.date.Day == pr1[j].prazdnik.Day)
+                    {
+                        if (act[i].reis.date.Month == pr1[j].prazdnik.Month)
+                        {
+                            if (act[i].reis.date.Year == pr1[j].prazdnik.Year)
+                            {
+                                act[i].stoimost = act[i].reis.zena / 100 * 80;
+                                j = countpr1 - 1;
+                            }
+                            else
+                            {
+                                act[i].stoimost = act[i].reis.zena;
+                            }
+                        }
+                        else
+                        {
+                            act[i].stoimost = act[i].reis.zena;
+                        }
+                    }
+                    else
+                    {
+                        act[i].stoimost = act[i].reis.zena;
+                    }
+                }
+            }
             DgridHotels2.ItemsSource = act;
             Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
         }
@@ -98,8 +162,11 @@ namespace aeroflot
         private void userReis_Click(object sender, RoutedEventArgs e)
         {
             List<aeroflot.pokupki> user = new List<aeroflot.pokupki>();
+            List<aeroflot.prazdniki> pr2 = new List<aeroflot.prazdniki>();
+            pr2 = Entities.GetContext().prazdniki.ToList();
             user = Entities.GetContext().pokupki.ToList();
             int count = Entities.GetContext().pokupki.Count();
+            int countpr2 = Entities.GetContext().prazdniki.Count();
             DgridHotels1.Visibility = Visibility.Collapsed;
             DgridHotels2.Visibility = Visibility.Visible;
             for (int i = 0; i < count; i++)
@@ -111,7 +178,36 @@ namespace aeroflot
                     count--;
                 }
             }
-            DgridHotels2.ItemsSource = user;
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < countpr2; j++)
+                {
+                    if (user[i].reis.date.Day == pr2[j].prazdnik.Day)
+                    {
+                        if (user[i].reis.date.Month == pr2[j].prazdnik.Month)
+                        {
+                            if (user[i].reis.date.Year == pr2[j].prazdnik.Year)
+                            {
+                                user[i].stoimost = user[i].reis.zena / 100 * 80;
+                                j = countpr2 - 1;
+                            }
+                            else
+                            {
+                                user[i].stoimost = user[i].reis.zena;
+                            }
+                        }
+                        else
+                        {
+                            user[i].stoimost = user[i].reis.zena;
+                        }
+                    }
+                    else
+                    {
+                        user[i].stoimost = user[i].reis.zena;
+                    }
+                }
+            }
+                DgridHotels2.ItemsSource = user;
             Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
         }
         public int rel = 0;
@@ -145,6 +241,7 @@ namespace aeroflot
                                 }
                             }
                             rr[0].status = "Активен";
+                            rr[0].statusOplati = "Не оплачен";
                             Entities.GetContext().pokupki.Add(rr[0]);
                             Entities.GetContext().SaveChanges();
                             rel = 1;

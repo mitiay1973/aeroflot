@@ -12,16 +12,9 @@ namespace aeroflot
     using System;
     using System.Collections.Generic;
     
-    public partial class pokupki
+    public partial class prazdniki
     {
         public int id { get; set; }
-        public int id_klient { get; set; }
-        public int id_reis { get; set; }
-        public string status { get; set; }
-        public string statusOplati { get; set; }
-        public Nullable<int> stoimost { get; set; }
-    
-        public virtual klients klients { get; set; }
-        public virtual reis reis { get; set; }
+        public System.DateTime prazdnik { get; set; }
     }
 }

@@ -39,6 +39,8 @@
                     <DataGridTextColumn Header="Клиент" Binding="{Binding klients.klient}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Рейс" Binding="{Binding reis.reis1}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Статус" Binding="{Binding status}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding stoimost}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Статус оплаты" Binding="{Binding statusOplati}" ></DataGridTextColumn>
                     <DataGridTemplateColumn Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

@@ -18,6 +18,7 @@
         <AssociationConnector Association="p_Plane_SorokinModel.FK_planes_piloti" ManuallyRouted="false" />
         <AssociationConnector Association="p_Plane_SorokinModel.FK_reis_planes" ManuallyRouted="false" />
         <AssociationConnector Association="p_Plane_SorokinModel.FK_pokupki_reis" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="p_Plane_SorokinModel.prazdniki" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
