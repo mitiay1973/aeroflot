@@ -23,13 +23,14 @@ namespace aeroflot
     /// </summary>
     public partial class Glavnaya : Page
     {
+        public Frame frame1;
         public static DateTime Today { get; }
         string User;
-        public Glavnaya(string user)
+        public Glavnaya(string user, Frame frame)
         {
             InitializeComponent();
             DgridHotels2.Visibility = Visibility.Collapsed;
-             
+            frame1 = frame;
             List<aeroflot.reis> reisii = new List<aeroflot.reis>();
             reisii = Entities.GetContext().reis.ToList();
             int counts = Entities.GetContext().reis.Count();
@@ -271,6 +272,10 @@ namespace aeroflot
             Glavnaya customer = (Glavnaya)DgridHotels.SelectedItem;
             rel = 0;
         }
-    
+
+        private void poisk_Click(object sender, RoutedEventArgs e)
+        {
+            frame1.Navigate(new PoisrReisa(frame1, User));
+        }
     }   
 }

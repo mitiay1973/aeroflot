@@ -1,0 +1,41 @@
+﻿<Page x:Class="aeroflot.PoisrReisa"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:aeroflot"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PoisrReisa">
+    <Grid Height="338" Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button x:Name="ppoisk" Content="Найти" HorizontalAlignment="Left" Margin="535,13,0,0" VerticalAlignment="Top" Height="18" Width="70" Click="ppoisk_Click"/>
+            <Button x:Name="back_poisk" Content="Назад" HorizontalAlignment="Left" Margin="649,13,0,0" VerticalAlignment="Top" Height="18" Width="70" Click="back_poisk_Click"/>
+            <ComboBox Width="225" Name="ComboType"  DisplayMemberPath="city"  Margin="0,0,575,0" ></ComboBox>
+            <ComboBox Width="225" Name="ComboType1"  DisplayMemberPath="city"  Margin="247,0,328,0" ></ComboBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="Dgridreis" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}" SelectionChanged="Dgridreis_SelectionChanged" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Рейс" Binding="{Binding reis1}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Город отправки" Binding="{Binding citys.city}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Город прибытия" Binding="{Binding citys1.city}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Самолет" Binding="{Binding planes.plane}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата вылета" Binding="{Binding date}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Длительность полета" Binding="{Binding dlitelnost}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding zena}" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

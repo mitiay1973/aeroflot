@@ -51,7 +51,7 @@ namespace aeroflot
                 {
                     if (users[i].password == pas)
                     {
-                        frame1.Navigate(new Glavnaya(users[i].klient));
+                        frame1.Navigate(new Glavnaya(users[i].klient,frame1));
                         vx = 1;
                         break;
                     }                   
