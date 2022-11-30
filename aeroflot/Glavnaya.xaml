@@ -34,7 +34,24 @@
             </DataGrid>
         </Grid>
         <Grid Grid.Row="0" >
-            <DataGrid x:Name="DgridHotels2" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-120,0" >
+            <DataGrid x:Name="DgridHotels2" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-120,0"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Клиент" Binding="{Binding klients.klient}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Рейс" Binding="{Binding reis.reis1}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding status}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding stoimost}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Статус оплаты" Binding="{Binding statusOplati}" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="0" >
+            <DataGrid x:Name="DgridHotels3" AutoGenerateColumns="False" IsReadOnly="True" d:ItemsSource="{d:SampleData ItemCount=10}" Margin="0,0,-120,0" SelectionChanged="DgridHotels2_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Клиент" Binding="{Binding klients.klient}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Рейс" Binding="{Binding reis.reis1}" ></DataGridTextColumn>

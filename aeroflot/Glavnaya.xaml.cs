@@ -30,6 +30,7 @@ namespace aeroflot
         {
             InitializeComponent();
             DgridHotels2.Visibility = Visibility.Collapsed;
+            DgridHotels3.Visibility = Visibility.Collapsed;
             frame1 = frame;
             List<aeroflot.reis> reisii = new List<aeroflot.reis>();
             reisii = Entities.GetContext().reis.ToList();
@@ -59,7 +60,8 @@ namespace aeroflot
             int count = Entities.GetContext().pokupki.Count();
             int countpr = Entities.GetContext().prazdniki.Count();
             DgridHotels1.Visibility = Visibility.Collapsed;
-                DgridHotels2.Visibility = Visibility.Visible;
+            DgridHotels3.Visibility = Visibility.Collapsed;
+            DgridHotels2.Visibility = Visibility.Visible;
                 for (int i = 0; i < count; i++)
                 {
                     if (otl[i].status!="Отложен")
@@ -117,6 +119,7 @@ namespace aeroflot
             int count = Entities.GetContext().pokupki.Count();
             int countpr1 = Entities.GetContext().prazdniki.Count();
             DgridHotels1.Visibility = Visibility.Collapsed;
+            DgridHotels3.Visibility = Visibility.Collapsed;
             DgridHotels2.Visibility = Visibility.Visible;
             for (int i = 0; i < count; i++)
             {
@@ -169,7 +172,8 @@ namespace aeroflot
             int count = Entities.GetContext().pokupki.Count();
             int countpr2 = Entities.GetContext().prazdniki.Count();
             DgridHotels1.Visibility = Visibility.Collapsed;
-            DgridHotels2.Visibility = Visibility.Visible;
+            DgridHotels2.Visibility = Visibility.Collapsed;
+            DgridHotels3.Visibility = Visibility.Visible;
             for (int i = 0; i < count; i++)
             {
                 if (user[i].klients.klient !=User)
@@ -208,8 +212,8 @@ namespace aeroflot
                     }
                 }
             }
-                DgridHotels2.ItemsSource = user;
-            Glavnaya customer2 = (Glavnaya)DgridHotels2.SelectedItem;
+                DgridHotels3.ItemsSource = user;
+            Glavnaya customer2 = (Glavnaya)DgridHotels3.SelectedItem;
         }
         public int rel = 0;
         private void DgridHotels_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -276,6 +280,132 @@ namespace aeroflot
         private void poisk_Click(object sender, RoutedEventArgs e)
         {
             frame1.Navigate(new PoisrReisa(frame1, User));
+        }
+        public int rel1 = 0;
+        private void DgridHotels2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (rel1 == 0)
+                {
+                if (MessageBox.Show($"Распечатать билет?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                    List<aeroflot.pokupki> user1 = new List<aeroflot.pokupki>();
+                    List<aeroflot.prazdniki> pr21 = new List<aeroflot.prazdniki>();
+                    pr21 = Entities.GetContext().prazdniki.ToList();
+                    user1 = Entities.GetContext().pokupki.ToList();
+                    int count1 = Entities.GetContext().pokupki.Count();
+                    int countpr21 = Entities.GetContext().prazdniki.Count();
+                    DgridHotels1.Visibility = Visibility.Collapsed;
+                    DgridHotels2.Visibility = Visibility.Collapsed;
+                    DgridHotels3.Visibility = Visibility.Visible;
+                    IList rows = DgridHotels3.SelectedItems;
+                    object a = rows[0];
+                        for (int i = 0; i < count1; i++)
+                        {
+                            if (user1[i].klients.klient != User)
+                            {
+                                user1.RemoveAt(i);
+                                i--;
+                                count1--;
+                            }
+                        }
+                        for (int i = 0; i < count1; i++)
+                        {
+                            for (int j = 0; j < countpr21; j++)
+                            {
+                                if (user1[i].reis.date.Day == pr21[j].prazdnik.Day)
+                                {
+                                    if (user1[i].reis.date.Month == pr21[j].prazdnik.Month)
+                                    {
+                                        if (user1[i].reis.date.Year == pr21[j].prazdnik.Year)
+                                        {
+                                            user1[i].stoimost = user1[i].reis.zena / 100 * 80;
+                                            j = countpr21 - 1;
+                                        }
+                                        else
+                                        {
+                                            user1[i].stoimost = user1[i].reis.zena;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        user1[i].stoimost = user1[i].reis.zena;
+                                    }
+                                }
+                                else
+                                {
+                                    user1[i].stoimost = user1[i].reis.zena;
+                                }
+                            }
+                        }
+                    for (int i = 0; i < count1; i++)
+                    {
+                        if (user1[i].id != ((aeroflot.pokupki)a).id)
+                        {
+                            user1.RemoveAt(i);
+                            i--;
+                            count1--;
+                        }
+                    }
+                        frame1.Navigate(new print(frame1, user1));
+                    rel1 = 1;
+                }
+                    else
+                    {
+                        rel1 = 1;
+                    }
+                }
+                DgridHotels3.ItemsSource = null;
+                List<aeroflot.pokupki> user = new List<aeroflot.pokupki>();
+                List<aeroflot.prazdniki> pr2 = new List<aeroflot.prazdniki>();
+                pr2 = Entities.GetContext().prazdniki.ToList();
+                user = Entities.GetContext().pokupki.ToList();
+                int count = Entities.GetContext().pokupki.Count();
+                int countpr2 = Entities.GetContext().prazdniki.Count();
+                DgridHotels1.Visibility = Visibility.Collapsed;
+                DgridHotels2.Visibility = Visibility.Collapsed;
+                DgridHotels3.Visibility = Visibility.Visible;
+            for (int i = 0; i < count; i++)
+                {
+                    if (user[i].klients.klient != User)
+                    {
+                        user.RemoveAt(i);
+                        i--;
+                        count--;
+                    }
+                }
+                for (int i = 0; i < count; i++)
+                {
+                    for (int j = 0; j < countpr2; j++)
+                    {
+                        if (user[i].reis.date.Day == pr2[j].prazdnik.Day)
+                        {
+                            if (user[i].reis.date.Month == pr2[j].prazdnik.Month)
+                            {
+                                if (user[i].reis.date.Year == pr2[j].prazdnik.Year)
+                                {
+                                    user[i].stoimost = user[i].reis.zena / 100 * 80;
+                                    j = countpr2 - 1;
+                                }
+                                else
+                                {
+                                    user[i].stoimost = user[i].reis.zena;
+                                }
+                            }
+                            else
+                            {
+                                user[i].stoimost = user[i].reis.zena;
+                            }
+                        }
+                        else
+                        {
+                            user[i].stoimost = user[i].reis.zena;
+                        }
+                    }
+                }
+                DgridHotels3.ItemsSource = user;
+                Glavnaya customer2 = (Glavnaya)DgridHotels3.SelectedItem;
+                rel1 = 0;         
         }
     }   
 }
